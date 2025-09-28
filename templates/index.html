@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoU - Classificador de Emails</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 AutoU Classificador de Emails</h1>
+            <p>Cole o texto de um email ou faça o upload de um arquivo (.txt ou .pdf) para classificá-lo e receber uma sugestão de resposta.</p>
+        </header>
+
+        <form action="/analisar" method="post" enctype="multipart/form-data">
+            <label for="email_text">Cole o texto do email aqui:</label>
+            <textarea name="email_text" id="email_text" rows="10" placeholder="Ex: Bom dia, equipe. Gostaria de solicitar uma atualização sobre o andamento do caso 89-B. Poderiam me dar um retorno? Atenciosamente."></textarea>
+
+            <label for="email_file">Ou faça o upload de um arquivo:</label>
+            <input type="file" name="email_file" id="email_file" accept=".txt,.pdf">
+
+            <button type="submit">Analisar Email</button>
+        </form>
+
+        <div class="results">
+            <h2>Resultado da Análise</h2>
+            <div class="result-box">
+                <h3>Categoria</h3>
+                <p id="categoria-resultado">Aguardando análise...</p>
+            </div>
+            <div class="result-box">
+                <h3>Resposta Sugerida</h3>
+                <p id="resposta-resultado">Aguardando análise...</p>
+                <button id="copy-button" style="display: none; margin-top: 15px; padding: 8px 12px; font-size: 14px; cursor: pointer;">Copiar Resposta</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    // Seleciona o formulário
+    const form = document.querySelector('form');
+
+    // Seleciona os elementos onde os resultados serão exibidos
+    const categoriaResultado = document.getElementById('categoria-resultado');
+    const respostaResultado = document.getElementById('resposta-resultado');
+    const copyButton = document.getElementById('copy-button');
+
+    // Adiciona um "escutador" para o evento de envio do formulário
+    form.addEventListener('submit', async (event) => {
+        // Previne o comportamento padrão do formulário (que recarrega a página)
+        event.preventDefault();
+
+        // Mostra uma mensagem de carregamento para o usuário
+        categoriaResultado.textContent = 'Analisando...';
+        respostaResultado.textContent = 'Gerando sugestão...';
+        copyButton.style.display = 'none'; // Esconde o botão durante a análise
+
+        // Cria um objeto FormData com os dados do formulário
+        const formData = new FormData(form);
+
+        try {
+            // Envia os dados para o seu endpoint /analisar
+            const response = await fetch('/analisar', {
+                method: 'POST',
+                body: formData
+            });
+
+            // Converte a resposta em JSON
+            const result = await response.json();
+
+            // Verifica se houve um erro retornado pela sua API
+            if (result.error) {
+                categoriaResultado.textContent = 'Erro';
+                respostaResultado.textContent = result.error;
+                copyButton.style.display = 'none'; // Garante que o botão continue escondido em caso de erro
+            } else {
+                // Atualiza o HTML com os resultados da análise
+                categoriaResultado.textContent = result.categoria;
+                respostaResultado.textContent = result.resposta_sugerida;
+
+                // Mostra o botão de copiar apenas se houver uma resposta válida
+                if (result.resposta_sugerida) {
+                    copyButton.style.display = 'block';
+                }
+                
+                //centraliza a tela na resposta
+                categoriaResultado.scrollIntoView({ behavior: 'smooth' });
+            }
+        } catch (error) {
+            // Trata erros de conexão ou outros problemas
+            categoriaResultado.textContent = 'Erro na comunicação';
+            respostaResultado.textContent = 'Não foi possível conectar ao servidor.';
+            copyButton.style.display = 'none';
+            console.error('Erro:', error);
+        }
+    });
+
+    // Adiciona o evento de clique para o botão de copiar
+    copyButton.addEventListener('click', () => {
+        const textoParaCopiar = respostaResultado.textContent;
+        navigator.clipboard.writeText(textoParaCopiar).then(() => {
+            copyButton.textContent = 'Copiado!';
+            setTimeout(() => {
+                copyButton.textContent = 'Copiar Resposta';
+            }, 2000); // Volta ao texto original depois de 2 segundos
+        });
+    });
+    </script>
+
+</body>
+</html>
