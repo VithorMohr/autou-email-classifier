@@ -8,7 +8,7 @@ Aplicação web para classificar e-mails usando IA, desenvolvido para o case pr�
 
 Esta é uma aplicação web desenvolvida como parte do processo seletivo da AutoU. O objetivo é classificar e-mails em categorias ("Produtivo" ou "Improdutivo") e sugerir uma resposta automática adequada, utilizando Inteligência Artificial e automação para otimizar o fluxo de trabalho de equipes que lidam com um grande volume de mensagens.
 
-[cite_start]O projeto foi construído com foco na autonomia e na capacidade de resolver problemas complexos, aplicando tecnologia de forma simples e eficiente para melhorar a vida do usuário, conforme a introdução do desafio.
+O projeto foi construído com foco na autonomia e na capacidade de resolver problemas complexos, aplicando tecnologia de forma simples e eficiente para melhorar a vida do usuário, conforme a introdução do desafio.
 
 ---
 
