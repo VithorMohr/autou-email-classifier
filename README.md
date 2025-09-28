@@ -44,7 +44,7 @@ Siga os passos abaixo para rodar a aplicação no seu ambiente local.
 
 **2. Clone o Repositório:**
 ```bash
-git clone [URL_DO_SEU_REPOSITORIO_AQUI]
+git clone [https://github.com/VithorMohr/autou-email-classifier.git]
 cd nome-da-pasta-do-projeto
 
 
