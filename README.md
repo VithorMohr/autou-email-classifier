@@ -91,3 +91,12 @@ Seguindo a orientação do próprio case prático, optei por não realizar o dep
 
 🎬 Vídeo Demonstrativo
 [https://www.loom.com/share/48a8e814154544759b140435a7b8f083?sid=adb52a42-a5f2-4824-b9fd-bad1ccc577ff]
+
+Ex usado para email improdutivo
+bom dia, como o solicitado segue meu currículo em anexo att
+
+
+Exemplos usados para email produtivo
+Olá equipe, gostaria de verificar o andamento do protocolo #789-C. Poderiam me dar uma atualização?
+
+Bom dia, equipe. Gostaria de solicitar uma atualização sobre o andamento do caso 89-B. Poderiam me dar um retorno? Atenciosamente, Vithor.
