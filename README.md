@@ -90,4 +90,4 @@ Conforme a justificativa acima, a aplicação possui uma dependência de um ambi
 Seguindo a orientação do próprio case prático, optei por não realizar o deploy, focando em uma solução local robusta e bem documentada. O funcionamento completo da aplicação é demonstrado no vídeo abaixo.
 
 🎬 Vídeo Demonstrativo
-[COLE_O_LINK_DO_SEU_VÍDEO_DO_YOUTUBE_AQUI]
+[https://www.loom.com/share/48a8e814154544759b140435a7b8f083?sid=adb52a42-a5f2-4824-b9fd-bad1ccc577ff]
